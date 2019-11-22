@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+bool trivijalan(int);
+int djeljitelji(int);
+
+int main() {
+	int broj = 0;
+	while (broj < 1) {
+		cout << "Unesi broj za provjeru" << endl;
+		cin >> broj;
+	}
+	if (trivijalan(broj)) cout << "Broj " << broj << " je prost" << endl;
+	else djeljitelji(broj);
+
+}
+
+bool trivijalan(int broj)
+{
+	for (int i = 2; i < broj; i++)
+		if (broj % i == 0)
+		{
+			return false;
+		}
+		
+        return true;
+
+}
+
+int djeljitelji(int broj)
+{
+	int brojac=0;
+	cout << "Nije trivijalan, a Djeljitelji tog broja su: ";
+	for (int i = 1; i <= broj; i++)
+	
+		
+		if (broj % i == 0)
+		{
+			cout << i << " ";
+			brojac++;
+		}
+	
+	return brojac;
+
+
+}
