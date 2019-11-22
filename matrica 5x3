@@ -1,0 +1,73 @@
+/*Zadatak 
+Napišite program koji će omogućiti kreiranje cjelobrojne matrice 5x3.  Svaki red u matrici predstavlja proizvod, a kolone:
+•	I kolona: šifru proizvoda (šifra mora biti četveroznamenkasta); II kolona: količinu proizvoda (vrijednosti u rasponu od 1 do 100); a III kolona predstavlja cijenu (cijene moraju biti pozitivne);
+•	omogućite unos podataka u matricu za svaki proizvod pojedinačno sa svim ograničenjima; upotrijebite funkciju void unos (int [], int);//NIJE GREŠKA, funkcija prima jednodimenzionalni niz
+1
+*/
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+void unos(int niz[], int);
+int main() {
+	int const n = 3;
+	int niz[3];
+	int const b = 5;
+	int const c = 3;
+	int matrica[b][c];
+
+
+	for (int a = 0; a < 5; a++)
+	{
+		unos(niz, n);
+		int i = 0;
+		for (int j = 0; j < 3; j++)
+		{
+			matrica[a][j] = niz[i];
+			i++;
+		}
+	}
+
+	cout << "Sifra	Kolicina  Cijena" << endl;
+		
+	for (int a = 0; a < 5; a++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			cout << matrica[a][j] <<"        ";
+		}
+		cout << endl;
+	}
+		
+	system("Pause>0");
+	return 0;
+
+
+}
+void unos(int niz[], int n) {
+	for (int i = 0; i < n; i++)
+		{
+			if (i == 0)
+			{
+				do {
+					cout << "sifra?";
+					cin >> niz[i];
+				} while (niz[i] < 1000 || niz[i]>9999);
+			}
+			if (i == 1) {
+				do {
+					cout << "kolicina ?";
+					cin >> niz[i];
+				} while (niz[i] < 1 || niz[i]>100);
+			}
+			if (i == 2) {
+				do {
+					cout << "Cijena?";
+					cin >> niz[i];
+				} while (niz[i] < 1);
+			}
+
+		}
+	
+}
+
