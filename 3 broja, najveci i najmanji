@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+float najveci(float, float, float);
+float najmanji(float, float, float);
+float min(float, float);
+float max(float, float);
+int main() {
+	float br1, br2, br3;
+	cout << "Unesi 3 broja" << endl;
+	cin >> br1 >> br2 >> br3;
+
+
+	cout << "Najveci je" << najveci(br1, br2, br3) << endl;
+	cout << "Najmanji je" << najmanji(br1, br2, br3) << endl;
+
+	system("Pause>0");
+	return 0;
+
+
+}
+float min(float a, float b)
+{
+	if (a > b) return b;
+	else return a;
+}
+
+float max(float a,float b)
+{
+	if (a > b) return a;
+	else return b;
+}
+
+float najveci(float a,float b, float c)
+{
+	if (c > max(a, b)) return c;
+	else return max(a, b);
+}
+
+float najmanji(float a,float b,float c)
+{
+	if (c < min(a, b)) return c;
+	else return min(a, b);
+}
