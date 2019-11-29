@@ -1,0 +1,74 @@
+#include <iostream>
+#include <time.h>
+using namespace std;
+bool provjera(int, int);
+void unos(int [][8], int);
+void ispis(int[][8], int);
+int najmanji(int[][8]);
+
+
+int main() {
+	int const n = 8;
+	int matrica[8][8];
+	unos(matrica, n);
+	ispis(matrica, n);
+	cout<<"Najmanji prosjek ima kolona"<<najmanji(matrica)+1<<endl;
+	for (int i = 0; i < 8; i++)
+		cout << matrica[i][najmanji(matrica)] << "\t";
+	system("Pause");
+
+	return 0;
+}
+
+bool provjera(int broj, int red)
+{
+	return (red % 2 == 0 && broj % 2 != 0) || (red % 2 != 0 && broj % 2 != 0);
+}
+
+void unos(int matr[][8], int n)
+{
+	srand(time(NULL));
+for(int i=0;i<n;i++)
+	for(int j=0;j<n;j++)
+		do {
+			matr[i][j] = rand() % 100 + 1;
+		} while (!provjera(matr[i][j], i));
+}
+
+void ispis(int matr[][8], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+			cout << matr[i][j] << "\t";
+		cout << endl;
+	}
+}
+
+int najmanji(int matr[][8])
+{
+	float min[8];
+	int suma = 0;
+	for (int i = 0; i < 8; i++)
+	{
+		suma = 0;
+		for (int j = 0; j < 8; j++)
+		{
+			suma += matr[j][i];
+		}
+		min[i] = suma / 8;
+	}
+
+
+	int minindeks = INT_MAX;
+	int indeksbr;
+	for (int i = 0; i < 8; i++)
+	{
+		if (min[i] < minindeks)
+		{
+			minindeks = min[i];
+			indeksbr = i;
+		}
+	}
+	return indeksbr;
+}
