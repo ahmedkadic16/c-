@@ -1,0 +1,75 @@
+#include <iostream>
+using namespace std;
+void prva(int [][5],int);
+void druga(int[][5],int);
+int sumad(int[][5], int);
+void ispis(int[][5],int);
+int main()
+{
+	int const n = 5;
+	int matrica[n][n];
+
+	prva(matrica,n);
+	ispis(matrica,n);
+
+	cout << "Suma dijagonale je" << sumad(matrica, n) << endl;
+
+	druga(matrica, n);
+	ispis(matrica, n);
+
+
+
+	system("Pause");
+	return 0;
+
+}
+
+void prva(int mat[][5],int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (j == i)
+			{
+				mat[i][j] = 0;
+			}
+			else mat[i][j] = 1;
+		}
+	}
+}
+
+void druga(int mat[][5], int n)
+{
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+		{
+			if (j == i)
+				mat[i][j] = 1;
+			else mat[i][j] = 0;
+		}
+}
+
+int sumad(int mat[][5], int n)
+{
+	int sumad=0;
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+		{
+			if (i + j == 4)
+				sumad += mat[i][j];
+		}
+
+	return sumad;
+}
+void ispis(int mat[][5],int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cout << mat[i][j] << " \t";
+		}
+		cout << endl;
+	}
+}
