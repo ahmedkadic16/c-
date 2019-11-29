@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+void unos(char[], int);
+int slova(char[], char[], int);
+int vokali(char[], int);
+int main() {
+	int const n = 9; 
+	char niz[n];
+	char niz2[n];
+	cout << "Unesi elemn prvog niza" <<endl ;
+	unos(niz, n);
+	cout << "Unesi elemente drugog niza" << endl;
+	unos(niz2, n);
+
+
+	cout << "Broj slova" << slova(niz, niz2, n);
+	cout << "Broj samoglasnika u prvom nizu" << vokali(niz, n);
+
+
+	system("Pause");
+	return 0;
+}
+void unos(char niz[], int n)
+{
+	for (int i = 0; i < n; i++)
+		cin >> niz[i];
+}
+
+int slova(char niz[], char niz2[], int n)
+{
+	int brojac = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if ((niz[i] >= 'a' && 'z' >= niz[i]) || (niz[i] >= 'A' && 'Z' >= niz[i])) brojac++;
+		if ((niz2[i] >= 'a' && 'z' >= niz2[i]) || (niz2[i] >= 'A' && 'Z' >= niz2[i])) brojac++;
+	}
+
+	return brojac;
+}	
+
+int vokali(char niz[], int n)
+{
+	int brojac = 0;
+	int const voks = 10;
+	char vok[voks] = { 'a','e','i','o','u','A','E','I','O','U' };
+	for (int i = 0; i < voks; i++)
+		for (int j = 0; j < n; j++)
+		{
+			if (niz[j] == vok[i])
+				brojac++;
+		}
+	return brojac;
+}
