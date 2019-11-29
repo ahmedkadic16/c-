@@ -1,0 +1,93 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+void meni(); //funkcija ispisuje sadržaj izbornika
+bool ProvjeraBroja(int); //funkcija provjerava je li broj s kojeg se traži pristup izborniku validan
+void Dopuna(double &); //funkcija omogućava dopunu kredita
+void Slanje(double &, double); //funkcija omogućava slanje dijela kredita drugom korisniku
+
+
+int main() {
+	long int broj;
+	double kredit = 5.0, slanjeKr;
+
+	cout << "Unesite broj" << endl;
+	cin >> broj;
+
+	if (ProvjeraBroja(broj))
+	{
+		while (true) {
+
+			meni();
+			int izbor;
+			cin >> izbor;
+
+			if (izbor == 0) break;
+
+			switch (izbor) {
+			case 1:
+				cout << "STanje na vasem racunu  " << kredit << endl;
+				break;
+
+			case 2:
+				Dopuna(kredit);
+				break;
+			case 3:
+				cout << "Koliko zelite poslati" << endl;
+				cin >> slanjeKr;
+				Slanje(kredit, slanjeKr);
+				break;
+			default:
+				cout << "Greska" << endl;
+			}
+		}
+	}
+
+
+	system("Pause");
+	return 0;
+}
+
+bool ProvjeraBroja(int broj) {
+
+	int duzina = 0;
+	int temp = broj;
+
+	while (broj)
+	{		
+		broj /= 10;
+		duzina++;
+	}
+	temp = temp/ pow(10, duzina-2);
+	
+	return (duzina == 8 || duzina == 9 || duzina == 60 || duzina == 61 || duzina == 62);
+		
+}
+
+
+void meni()
+{
+	cout << "Izaberite opciju:" << endl
+		<< "1-provjera stanja" << endl
+		<< "2 - dopuniti" << endl
+		<< "3 - Poslati kredit" << endl
+		<< "0 za izlaz " << endl;
+}
+
+void Dopuna(double &kredit)
+{
+	double dopuna;
+	cout << "Koliko zelite dopuniti" << endl;
+		cin >> dopuna;
+		
+kredit += dopuna;
+}
+
+void Slanje(double&kredit, double slanjeK)
+{
+	if (slanjeK < kredit)
+		kredit -= slanjeK;
+	else
+		cout << "Nemate sredstava" << endl;
+}
