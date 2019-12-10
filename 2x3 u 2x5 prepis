@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+void unos(int[][3]);
+void ispis(int matrica[][3]);
+void kopiraj(int[][3],int[][5]);
+
+int main() {
+
+	int matrica[2][3];
+	int mat2[2][5];
+	unos(matrica);
+	ispis(matrica);
+	cout << "-----------------" << endl;
+	kopiraj(matrica, mat2);
+
+		for (int i = 0; i < 2; i++)
+		{
+			{
+				for (int j = 0; j < 5; j++)
+					cout << mat2[i][j] << "\t";
+			}
+
+			cout << endl;
+		}
+	
+	system("Pause");
+	return 0;
+}
+
+void unos(int matrica[2][3]){
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+				//rucni unos komentiraj rand i odkomentiraj cin>>
+				matrica[i][j] = rand()%100+1;
+				/*cin >> matrica[i][j];*/
+			
+		}
+	}
+}
+void ispis(int matrica[][3])
+{
+	for (int i = 0; i < 2; i++)
+	{
+		{
+			for (int j = 0; j < 3; j++)
+				cout << matrica[i][j] << "\t";
+		}
+
+		cout << endl;
+	}
+}
+void kopiraj(int matrica[][3], int mat2[][5]) {
+int s=0;
+
+for (int k = 0; k < 2; k++)
+	for (int l = 0; l < 5; l++)
+		mat2[k][l] = matrica[k][l];
+
+for (int k = 0; k < 2; k++)
+	for (int l = 0; l < 2; l++)
+		mat2[k][l+3] = matrica[k][l];
+				
+}
