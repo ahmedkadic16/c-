@@ -1,0 +1,268 @@
+#include <iostream>
+using namespace std;
+float najmanji(float, float, float);
+float najveci(float, float, float);
+float min(float, float);
+float max(float, float);
+
+
+int main() {
+	float a, b, c;
+	cout << "Unesi 3 broja" << endl;
+	cin >> a >> b >> c;
+	
+	cout << "Najmanji je " << najmanji(a, b, c) << endl;
+	cout << "Najveci je " << najveci(a, b, c) << endl;
+
+	system("Pause");
+	return 0;
+}
+
+float min(float a, float b) {
+	if (a < b)
+		return a;
+	else
+		return b;
+}
+float max(float a, float b) {
+
+	if (a > b)
+		return a;
+	else
+		return b;
+}
+
+float najmanji(float a, float b, float c)
+{
+	if (a < min(b, c))
+		return a;
+	if (b < min(a, c))
+		return b;
+	else
+		return c;
+}
+float najveci(float a, float b, float c)
+{
+
+	if (a > max(b, c))
+		return a;
+	if (b > max(a, c))
+		return b;
+	else
+		return c;
+}
+
+
+
+
+
+
+
+
+
+
+
+#include <iostream>
+using namespace std;
+int slova(char[], char[], int);
+int vokali(char[], int);
+int main() {
+	int const n = 4;
+	char niz1[n];
+	char niz2[n];
+
+
+	cout << "Unesite clanove niza" << endl;
+	for (int i = 0; i < n; i++)
+		cin >> niz1[i];
+	cout << "Unesite clanove drugog niza" << endl;
+	for (int i = 0; i < n; i++)
+		cin >> niz2[i];
+	cout << "sLOVA " << slova(niz1, niz2, n);
+	cout << "Vokali " << vokali(niz1, n);
+
+	system("Pause");
+	return 0;
+}
+int slova(char niz1[], char niz2[], int n) {
+	int brojac=0;
+	for (int i = 0; i < n; i++)
+	{
+		if ((niz1[i] > 'a'-1 && niz1[i] < 'z'+1) || (niz1[i] > 'A' - 1 && niz1[i] < 'Z' + 1))
+			brojac++;
+		if ((niz2[i] > 'a' - 1 && niz2[i] < 'z' + 1) || (niz1[i] > 'A' - 1 && niz1[i] < 'Z' + 1))
+			brojac++;
+	}
+	return brojac;
+}
+int vokali(char niz[], int n)
+{
+	char vokali[10] = { 'a','e','i','o','u','A','E','I','O','U' };
+	int brojac = 0;
+	int redni = 0;
+	for (int j = 0; j < 10; j++) {
+		for (int i = 0; i < n; i++)
+		{
+			if (niz[j] == vokali[i])
+				brojac++;
+
+		}
+	}
+	return brojac;
+}
+
+
+
+
+
+#include <iostream>
+using namespace std;
+int const n = 5;
+void upisjedinica(int[][n], int);
+void okretanje(int[][n], int);
+void ispis(int[][n], int);
+
+
+int main() {
+	int const n = 5;
+	int matrica[n][n];
+	upisjedinica(matrica, n);
+	ispis(matrica, n);
+	cout << "\nNakon zamjeneo\n";
+	okretanje(matrica, n);
+	ispis(matrica, n);
+
+	system("Pause");
+	return 0;
+}
+void upisjedinica(int matrica[][n], int br) {
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+		{
+			if (i == j)
+				matrica[i][j] = 0;
+			else
+				matrica[i][j] = 1;
+		}
+}
+void okretanje(int matrica[][n], int br) {
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+		{
+			if (i == j)
+				matrica[i][j] = 1;
+			else
+				matrica[i][j] = 0;
+		}
+}
+void ispis(int matrica[][n], int br)
+{
+	for (int i = 0; i < n; i++)
+	{
+		{
+			for (int j = 0; j < n; j++)
+			cout << matrica[i][j] << "\t";
+		}
+
+		cout << endl;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+#include <iostream>
+#include <time.h>
+using namespace std;
+
+void unos(int[][4], int);
+void ispis(int[][4], int);
+void zamijeniR(int[][4], int, int);
+float avrgd(int[][4]);
+
+int main() {
+	int red, red2;
+	int const n = 4;
+	int matrica[n][n];
+	unos(matrica, n);
+	cout << "Izgled matrice: " << endl;
+	ispis(matrica, n);
+	cout << "prosjecna vr elemeanata iznad glavne dijagonale" << endl;
+	cout << avrgd(matrica) << endl;
+	cout << "zelim zamijeniti red(1-4): " << endl;
+	do {
+		cin >> red;
+		if (red < 1 || red >4) cout << "Unesite broj od 1-4" << endl;
+	} while (red < 1 || red >4);
+	cout << " sa ";
+	do {
+		cin >> red2;
+		if (red2 < 1 || red2 >4) cout << "Unesite broj od 1-4" << endl;
+	} while (red2 < 1 || red2>4);
+
+	zamijeniR(matrica, red, red2);
+	cout << "Nakon zamjene" << endl;
+	ispis(matrica, n);
+	cout << " prosjecna vr elem iznad gd " << avrgd(matrica) << endl;
+	
+
+	system("Pause");
+	return 0;
+}
+
+void unos(int matrica[][4],int n){
+	cout << "Unosite parne brojeve kao elemnte niza" << endl;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			do {
+				//rucni unos komentiraj rand i odkomentiraj cin>>
+				matrica[i][j] = rand()%100+1;
+				/*cin >> matrica[i][j];*/
+			} while (matrica[i][j] % 2 != 0);
+
+		}
+	}
+}
+void ispis(int matrica[][4], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		{
+			for (int j = 0; j < n; j++)
+				cout << matrica[i][j] << "\t";
+		}
+
+		cout << endl;
+	}
+}
+
+void zamijeniR(int matrica[][4], int red, int red2) {
+	
+	int zamjena[4];
+	for (int j = 0; j < 4; j++)
+	{
+		zamjena[j] = matrica[red-1][j];
+		matrica[red-1][j] = matrica[red2-1][j];
+		matrica[red2-1][j] = zamjena[j];
+	}
+	
+}
+float avrgd(int matrica[][4]) {
+	int suma=0;
+	int brojac = 0;
+	for (int i = 0; i < 4; i++)
+		for (int j = 0; j < 4; j++)
+		{
+			if (j > i)
+				suma += matrica[i][j];
+		}
+				return suma / 6.0;
+}
