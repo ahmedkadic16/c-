@@ -76,7 +76,7 @@ void unos(int matrica[][n], int n) {
 			do {
 				matrica[i][j] = rand() % 99+1;
 				/*cin >> matrica[i][j];*/
-			} while (matrica[i][j] < 10 || matrica[i][j] > 99);
+			} while (matrica[i][j] < 10 ); //nece nikad preci 99 jer %99 moze biti 98 max +1 
 }
 
 void ispis(int matrica[][n],int n) {
