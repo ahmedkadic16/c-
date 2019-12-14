@@ -1,0 +1,127 @@
+Napisati program koji će omogučiti:
+
+Unos 2D niza od 10 x 10 elemanata vodeći računa da su svi elementi dvocifreni (ukoliko unos nekog elementa ne zadovoljava uslov, 
+ponavljati unos tog elementa dok se ne zadovolji uslov); Koristiti funkciju unos
+
+Izvršiti transpoziciju niza tako što će se zamjeniti redovi i kolone - Koristiti funkciju transpose, a zatim na osnovu izmijenjenog 
+2D niza:
+
+1.Izračunati aritmetičku sredinu svih prostih brojeva ispod sporedne dijagonale - 
+Koristiti dvije funkcije: aritmeticka i prost_broj (pozivati će se iz funkcije aritmeticka)
+
+2.Napisati funkciju simpatican koja će provjeriti da li su brojevi iznad sporedne dijagonale simpatični*.
+Obavezno koristiti navedene funkcije, a parametre i eventualne povratne vrijednosti definisati prema potrebi. 
+U main() funkciji napisati testni program koji će omogućiti izvršenje svih funkcija navedenim redoslijedom.
+
+[a][a][a][a][a]        [a][b][c][d][e]
+[b][b][b][b][b]        [a][b][c][d][e]
+[c][c][c][c][c]  --->  [a][b][c][d][e]
+[d][d][d][d][d]        [a][b][c][d][e]
+[e][e][e][e][e]        [a][b][c][d][e]
+
+Pomoć: Broj je simpatičan ukoliko je zbir cifara njegovog kvadrata jednak kvadratu zbira njegovih cifara. 7
+Broj 21 je simpatičan jer je s(441) = s(21) * s(21) pri čemu je s(n) zbir cifara prirodnog broja n.
+
+
+
+
+#include <iostream>
+using namespace std;
+int const n = 10;
+
+void unos(int[][n], int);
+void ispis(int matrica[][n],int );
+void transpozicija(int matrica[][n]);
+bool prost(int);
+int aritmeticka(int[][n]);
+int sumacifara(int);
+void simpatican(int[][n]);
+
+int main() {
+
+	int matrica[n][n];
+	unos(matrica, n);
+	//ispis(matrica, n);
+	transpozicija(matrica);
+	ispis(matrica, n);
+	cout << "Aritmeticka sredina: "<<aritmeticka(matrica) << endl;
+	simpatican(matrica);
+	
+	system("Pause>0");
+	return 0;
+}
+
+int sumacifara(int broj) {
+	int suma = 0;
+	int brojac = 0;
+	while (broj) {
+		suma += broj%10;
+		broj /= 10;
+	}
+	return suma;
+}
+void simpatican(int matrica[][n]) {
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			if(i+j<n-1)
+			{
+				if (sumacifara(matrica[i][j] * matrica[i][j]) == (sumacifara(matrica[i][j]) * sumacifara(matrica[i][j])))
+					cout << "Broj " << matrica[i][j] << " je simpatican" << endl;
+			}
+}
+
+void unos(int matrica[][n], int n) {
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			do {
+				matrica[i][j] = rand() % 100;
+				/*cin >> matrica[i][j];*/
+			} while (matrica[i][j] < 9 || matrica[i][j] > 99);
+}
+
+void ispis(int matrica[][n],int n) {
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+			cout << matrica[i][j] << "\t";
+
+		cout << endl;
+	}
+}
+
+void transpozicija(int matrica[][n]) {
+	int temp;
+	for (int i = 0; i <= n; i++)
+		for (int j = i; j < n; j++)
+		{
+			temp = matrica[i][j];
+			matrica[i][j] = matrica[j][i];
+			matrica[j][i] = temp;
+		}
+
+}
+bool prost(int broj) {
+	for (int i = 2; i < broj; i++)
+	if (broj % i == 0)
+			return false;
+		return true;
+	
+
+}
+int aritmeticka(int matrica[][n]) {
+	int suma = 0;
+	int brojac = 0;
+	char sum = 'a';
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+		{
+			if (i+j>n-1 && prost(matrica[i][j]))
+			{
+				suma += matrica[i][j];
+				brojac++;
+			}
+		}
+	if (suma == 0)
+		return 0;
+	else return suma;
+}
