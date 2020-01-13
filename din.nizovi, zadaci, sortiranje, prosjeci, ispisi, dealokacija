@@ -1,0 +1,130 @@
+#include <iostream>
+#include <assert.h>
+using namespace std;
+
+void alokacija(int**& niz, int &ucesnika,int &kolona) {
+	cout << "Unesite broj ucesnika: ";
+	cin >> ucesnika;
+	kolona = 3;
+	niz = new int *[ucesnika];
+	assert(niz != nullptr);
+	for (int i = 0; i < ucesnika; i++)
+	{
+		niz[i] = new int[kolona];
+	}
+}
+
+void unosbodova(int** niz, int ucesnika,int kolona) {
+	//cout << "Unos bodova" << endl;
+	for (size_t i = 0; i < ucesnika; i++)
+	{
+		for (size_t j = 0; j < kolona; j++)
+		{
+			cout << "Ucesnik " << i + 1 << ", zadatak " << j + 1 << ": ";
+			cin >> niz[i][j];
+			
+			//niz[i][j] = rand() % 10 + 1;
+		}
+	}
+};
+void uprosjek(int** niz,float *prosjek, int ucesnika,int kolona) {
+	for (size_t i = 0; i < ucesnika; i++)
+	{
+		float sum = 0.0;
+		for (size_t j = 0; j <kolona; j++)
+		{
+			sum += niz[i][j];
+		}
+		prosjek[i] = sum / 3.0;
+		//cout << "prosjek " << i + 1 << " ucesnika" << prosjek[i] << endl;
+	}
+}
+void zadaci(int** niz,float zadatci [], int ucesnika, int kolona) {
+	for (size_t i = 0; i < kolona; i++)
+	{
+		float sum = 0;
+		for (size_t j = 0; j < ucesnika; j++)
+		{
+			sum += niz[j][i];
+		}
+		zadatci[i] = sum / ucesnika;
+		cout << "prosjek " << i + 1 << " zadatka" << zadatci[i] << endl;
+	}
+}
+void sortiranje(float* prosjek,int ucesnika ) {
+	int max = INT_MIN;
+	for (int i = 0; i < ucesnika; i++)
+	{
+		for (int j=i+1; j < ucesnika; j++)
+		{
+			if (prosjek[i] < prosjek[j])
+				swap(prosjek[i], prosjek[j]);
+		}
+	}
+}
+void prepis(float* prosjek, float* poredak,int ucesnika) {
+	for (size_t i = 0; i < ucesnika; i++)
+	{
+		poredak[i] = prosjek[i];
+	}
+}
+
+void ispis(float* prosjek, float* poredak, int ucesnika) {
+	cout<<"RANG LISTA"<<endl;
+	for (size_t i = 0; i < ucesnika; i++)
+	{
+		for (size_t j = 0; j < ucesnika; j++)
+		{
+			if (prosjek[i] == poredak[j])
+			{
+				cout << "Ucesnik " << j + 1 << " je ostvario prosjek: " << prosjek[i] << endl;
+				break;
+			}
+		}
+	}
+}
+
+void dealokacija(int**& niz, int ucesnika) {
+	for (size_t i = 0; i < ucesnika; i++)
+	{
+		delete[] niz[i];
+	}
+	delete[] niz;
+	niz = nullptr;
+}
+
+
+int main() {
+	int** niz = nullptr;
+	int ucesnika=0;
+	int kolona = 0;
+	float* prosjek =nullptr;
+	float zadatci[3];
+	float* poredak = nullptr;
+
+	alokacija(niz, ucesnika,kolona);
+	unosbodova(niz, ucesnika,kolona);
+	prosjek = new float[ucesnika];
+	assert(prosjek != NULL);
+	uprosjek(niz,prosjek, ucesnika,kolona);
+	poredak = new float[ucesnika];
+	assert(poredak != NULL);
+	prepis(prosjek, poredak,ucesnika); 
+	sortiranje(prosjek, ucesnika);
+
+  cout << "--------------------" << endl;
+	ispis(prosjek, poredak, ucesnika);
+	
+  cout << "--------------------" << endl;
+	cout << "Prosjek bodova po zadacima" << endl;
+	zadaci(niz, zadatci, ucesnika, kolona);
+	
+	dealokacija(niz, ucesnika);
+	delete[] prosjek;
+	prosjek = nullptr;
+	delete[] poredak;
+	poredak = nullptr;
+
+	system("Pause>0");
+	return 0;
+}
