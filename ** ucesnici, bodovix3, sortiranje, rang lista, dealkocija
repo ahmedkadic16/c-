@@ -1,6 +1,6 @@
 /*Učitaj broj učesnika i alociraj memoriju za dinamička polja
-Učitaj bodove
-Izračunaj prosjek za svaki programski zadatak x3
+Učitaj bodove bodovi[ucesnici][3]
+Izračunaj prosjek za svaki programski zadatak 
 prosjek_zadatak=suma_bodova_zadatka/N
 Izračunaj prosjek za svakog učesnika
 prosjek_ucesnika=suma_bodova_ucesnika/3
