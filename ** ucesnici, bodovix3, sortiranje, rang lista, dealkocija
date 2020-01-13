@@ -1,3 +1,15 @@
+/*Učitaj broj učesnika i alociraj memoriju za dinamička polja
+Učitaj bodove
+Izračunaj prosjek za svaki programski zadatak x3
+prosjek_zadatak=suma_bodova_zadatka/N
+Izračunaj prosjek za svakog učesnika
+prosjek_ucesnika=suma_bodova_ucesnika/3
+Sortiraj rezultate silazno po prosjecima učesnika
+Ispiši rang listu učesnika i grupne prosjeke
+Dealociraj memorijski prostor
+
+*/
+
 #include <iostream>
 #include <assert.h>
 using namespace std;
