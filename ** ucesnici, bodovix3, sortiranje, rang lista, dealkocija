@@ -92,9 +92,11 @@ void ispis(float* prosjek, float* poredak, int ucesnika) {
 	{
 		for (size_t j = 0; j < ucesnika; j++)
 		{
-			if (prosjek[i] == poredak[j])
+			if (poredak[j]==prosjek[i])
 			{
-				cout << "Ucesnik " << j + 1 << " je ostvario prosjek: " << prosjek[i] << endl;
+				cout << "Ucesnik " << j + 1 << " je osvojio" << poredak[j] << endl;
+				//prosjek[i] = 0;
+				poredak[j] = 0;
 				break;
 			}
 		}
