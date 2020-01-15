@@ -94,7 +94,7 @@ void ispis(float* prosjek, float* poredak, int ucesnika) {
 		{
 			if (poredak[j]==prosjek[i])
 			{
-				cout << "Ucesnik " << j + 1 << " je osvojio" << poredak[j] << endl;
+				cout << "Ucesnik " << j + 1 << " je osvojio: " << poredak[j] << endl;
 				//prosjek[i] = 0;
 				poredak[j] = 0;
 				break;
@@ -130,7 +130,8 @@ int main() {
 	assert(poredak != NULL);
 	prepis(prosjek, poredak,ucesnika); 
 	sortiranje(prosjek, ucesnika);
-	cout << "--------------------" << endl;
+	
+	cout << "--------------------" << endl;		
 	ispis(prosjek, poredak, ucesnika);
 	cout << "--------------------" << endl;
 	cout << "Prosjek bodova po zadacima" << endl;
