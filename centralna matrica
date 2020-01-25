@@ -1,0 +1,97 @@
+#include <iostream>
+#include <iomanip>
+#include <time.h>
+
+using namespace std;
+int unosbroja(int &broj) {
+	do
+	{
+		cout << "Unesi broj 1<=n<=10: ";
+		cin >> broj;
+		//broj = rand() % 10 + 1;
+		//cout << broj<<endl;
+	} while (broj<1 || broj>10);
+	return broj;
+}
+void alokacija(int** &matrica,int &broj) {
+	matrica = new int*[broj];
+	for (int i = 0; i < broj; i++)
+	{
+		matrica[i] = new int[broj];
+	}
+}
+void dealokacija(int** &matrica, int broj) {
+	for (size_t i = 0; i < broj; i++)
+	{
+		delete[]matrica[i];
+	}
+	delete[]matrica;
+	matrica = nullptr;
+}
+void upis(int** matrica, int broj) {
+	for (int i = 0; i < broj; i++)
+	{
+		for (int j = 0; j < broj; j++)
+		{
+			matrica[i][j] = rand() % 10 + 1;
+			//cin >> matrica[i][j];
+		}
+	}
+}
+void ispis(int** matrica, int broj) {
+	for (size_t i = 0; i < broj; i++)
+	{
+		for (size_t j = 0; j < broj; j++)
+		{
+			cout << setw(4) << matrica[i][j];
+		}cout << endl;
+	}
+}
+int provjera(int **matrica, int broj) {
+	int k=broj-1;
+	int l=broj-1;
+	int brojac = 0;
+	
+	if (broj % 2 == 0)
+		return -1;
+	
+	for (int i = 0; i < broj; i++)
+	{
+		for (int j = 0; j < broj; j++)
+		{
+			if (matrica[i][j] != matrica[k][l])
+				return 0;
+			else
+			{
+				brojac++;
+				l--;
+				if (l == -1) {
+					k--;
+					l = broj - 1;
+				}
+			}
+		}
+	}
+	if (brojac == (broj * broj))
+		return 1;
+
+	else return 0;
+}
+
+int main() {
+	srand(time(NULL));
+	int** matrica = nullptr;
+	int broj=0;
+	
+	unosbroja(broj);
+	alokacija(matrica,broj);
+	
+	upis(matrica, broj);
+	ispis(matrica, broj);
+	
+	cout<<provjera(matrica, broj);
+
+	dealokacija(matrica, broj);
+	system("Pause>0");
+	return 0;
+}
