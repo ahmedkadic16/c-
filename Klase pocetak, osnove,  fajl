@@ -1,0 +1,66 @@
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+class radnik {
+public:
+	string prezime;
+	int staz;
+	//radnik(int stazx, string prezimex) { //konstruktor automatski poziv public
+	//	cout << "Konstruktor" << endl; 
+	//	staz=stazx;
+	//	prezime=prezimex;
+	//}
+private:							//privatno moze se pristupi samo iz klase
+	int godine=5;
+public:
+	void setter(int god) {				// postavljac za private atribut	
+		godine = god;
+	}
+	int getter() {						// ispisivac za private atribut
+		return godine;
+	}
+};
+class gazda :public radnik {
+public:
+	string ime;
+};
+
+int main() {
+	radnik meho;
+	//meho.prezime = "  s s s";
+	//meho.staz = 56;
+	gazda gazdica;
+	gazdica.ime = "GAZDAime";
+	meho.prezime = "PREZIMEmeho";
+	meho.staz = 4;
+	cout << "------------" << endl;
+	cout << meho.prezime << "  " << meho.staz << endl;
+	gazdica.prezime = "GAZDAprezime";
+	gazdica.staz = 31;
+	cout << "-------------" << endl;
+	cout << gazdica.ime +" " + gazdica.prezime << endl;
+	cout << gazdica.staz << endl;
+	cout << "\nPlata mehina" << endl;
+	meho.setter(300);
+	cout<<meho.getter();
+	gazdica.setter(1200);
+	cout << "\nPlata gazdina\n" << gazdica.getter();
+	
+	
+	ofstream mojfajl("tekst.txt");					//napravis txt fajls 
+	mojfajl << "FILES CAN BE TRICKY	and so fucking on" << endl;		//upisivanje u fajl
+	mojfajl.close();
+	string tekst;
+	ifstream citanje("tekst.txt");					 
+	cout << endl;
+	while (getline(citanje, tekst)) {				//poziv za citanje
+		cout << tekst;
+	}
+	citanje.close();
+	system("Pause>0");
+	return 0;
+}
