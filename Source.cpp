@@ -1,0 +1,40 @@
+#include <iostream>
+#include <iomanip>
+#include <time.h>
+
+using namespace std;
+bool prost(int broj) {
+	for (int i = 2; i < broj/2; i++)
+	{
+		if (broj % i == 0)
+			return false;
+	}
+	return true;
+}
+int main() {
+	srand(time(NULL));
+	float n;
+	float brojac = 0;
+	float suma;
+	int broj;
+	
+	do
+	{
+		cout << "Unesi n ";
+		cin >> n;
+	} while (10>n || n>1000);
+
+	for (int i = 0; i < n; i++)
+	{
+		broj = rand() % 1000 + 1;
+		if (prost(broj))
+			brojac++;
+	}
+	suma = brojac / n * 100;
+	
+	cout << "Dobio sam " << brojac << "Prostih brojeva" << endl;
+	cout << " to je : "  <<	suma << "%" << endl;
+
+	system("Pause>0");
+	return 0;
+}
